@@ -82,9 +82,12 @@ class Bitcoin(callbacks.Plugin):
         # Format response without decimals
         current_price_bold = ircutils.bold(f"${current_price:.0f}")
         start_price_bold = ircutils.bold(f"${start_price:.0f}")
-        irc.reply(f"Current Price: {current_price_bold} ({percentage_diff_formatted}) – {start_price_bold} {timeframe} ago.")
+        # Broadcast the response to the channel
+        irc.reply(f"Current Price: {current_price_bold} ({percentage_diff_formatted}) – {start_price_bold} {timeframe} ago.", to=msg.args[0])
+
 
     # Make 'timeframe' optional
     bitcoin = wrap(bitcoin, [optional("text")])
+    btc = bitcoin
 
 Class = Bitcoin
